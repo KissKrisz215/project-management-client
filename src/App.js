@@ -7,6 +7,8 @@ import { Route ,Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ProjectListPage } from './pages/ProjectListPage';
 import { ProjectDetailsPage } from './pages/ProjectDetailsPage';
+import { ErrorPage } from './pages/ErrorPage';
+import {EditProjectPage} from './pages/EditProjectPage';
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
       <Route  path="/" element={<HomePage />}></Route>
       <Route path="/projects" element={<ProjectListPage/>}></Route>
       <Route path="/projects/:id" element={<ProjectDetailsPage />}></Route>
+      <Route path="/projects/edit/:id" element={<EditProjectPage />}></Route>
+      <Route path="*" element={<ErrorPage />}></Route>
     </Routes>
     </div>
   );

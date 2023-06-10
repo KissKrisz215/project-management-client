@@ -33,6 +33,7 @@ export function ProjectDetailsPage(){
         </li>
        ))}
        <Link to="/projects"><button>Back to Projects</button></Link>
+       <Link to={`/projects/edit/${id}`}><button>Edit Project</button></Link>
        </div>
     );
 }

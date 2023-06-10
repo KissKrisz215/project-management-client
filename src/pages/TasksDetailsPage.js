@@ -9,14 +9,15 @@ export function TasksDetailsPage(){
     const {id} = useParams();
     const [task,setTask] = useState({title: "", description: "", isDone: null});
     const navigate = useNavigate();
-    console.log(task)
+    const storedToken = localStorage.getItem("authToken");
 
     useEffect(() => {
         getTask();
     }, []);
 
     const getTask = () => {
-        axios(`${API_URL}/api/tasks/${id}`)
+
+        axios(`${API_URL}/api/tasks/${id}`, {headers: {Authorization: `Bearer ${storedToken}`}} )
         .then((response) => {
           const  {title, description, isDone} = response.data;
             setTask({
@@ -30,7 +31,10 @@ export function TasksDetailsPage(){
  
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`${API_URL}/api/tasks/${id}`, task)
+
+        const storedToken = localStorage.getItem("authToken")
+
+        axios.put(`${API_URL}/api/tasks/${id}`, task, {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => console.log(response.data))
         .catch((err) => console.log(err));
     }
@@ -45,7 +49,7 @@ export function TasksDetailsPage(){
       };
     
     const deleteTask = () => {
-        axios.delete(`${API_URL}/api/tasks/${id}`)
+        axios.delete(`${API_URL}/api/tasks/${id}`, {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => navigate(`/projects/`))
         .catch((err) => console.log(err));
     }

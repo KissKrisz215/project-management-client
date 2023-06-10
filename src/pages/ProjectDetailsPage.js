@@ -12,13 +12,18 @@ export function ProjectDetailsPage(){
     const navigate = useNavigate();
 
     const getProject = () => {
-        axios(`${API_URL}/api/projects/${id}`)
+
+        const storedToken = localStorage.getItem("authToken");
+
+        axios(`${API_URL}/api/projects/${id}`,
+         {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => setProject(response.data))
         .catch((err) => console.log(err));
     }
 
     const deleteProject = () => {
-        axios.delete(`${API_URL}/api/projects/${id}`)
+        const storedToken = localStorage.getItem("authToken")
+        axios.delete(`${API_URL}/api/projects/${id}`, {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => navigate("/projects"))
         .catch((err) => console.log(err))
     }

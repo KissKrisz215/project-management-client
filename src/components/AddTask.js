@@ -14,7 +14,10 @@ export function AddTask({project, getProject}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_URL}/api/tasks`, body)
+
+        const storedToken = localStorage.getItem("authToken");
+
+        axios.post(`${API_URL}/api/tasks`, body, {headers: {Authorization: `Bearer ${storedToken}`}})
         .then((response) => getProject())
         .catch(err => console.log(err));
     }

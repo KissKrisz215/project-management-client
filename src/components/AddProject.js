@@ -14,7 +14,10 @@ export function AddProject({getAllProjects}){
 
     const handleSubmit = (e) => {
      e.preventDefault();
-     axios.post(`${API_URL}/api/projects`, body)
+
+        const storedToken = localStorage.getItem("authToken")
+
+     axios.post(`${API_URL}/api/projects`, body, {headers: {Authorization: `Bearer ${storedToken}`}})
      .then(response => {
         setBody({title: "", description: ""})
         getAllProjects();

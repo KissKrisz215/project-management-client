@@ -25,14 +25,14 @@ export function AddTask({project, getProject}){
     }
 
     return(
-        <>
-            <form onSubmit={handleSubmit}>
+        <div className="w-500 border p-5">
+            <form onSubmit={handleSubmit} className="text-center">
                 <label htmlFor="" className="fw-bold fs-5">Title:</label>
-                <input onChange={(e) => handleInputChange(e)} name="title" value={body.title} type="text" className="form-control" />
+                <input onChange={(e) => handleInputChange(e)} name="title" value={body.title} type="text" className="form-control" required />
                 <label htmlFor="" className="fw-bold fs-5">Description:</label>
-                <input onChange={(e) => handleInputChange(e)} type="text" value={body.description} className="form-control" name="description" />
-                <button type="submit">Add Task</button>
+                <input onChange={(e) => handleInputChange(e)} type="text" value={body.description} className="form-control" name="description" required />
+                <button type="submit" className="btn btn-primary my-3">Add Task</button>
             </form>
-        </>
+            </div>
     );
 }

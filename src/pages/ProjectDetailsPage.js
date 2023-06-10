@@ -28,7 +28,7 @@ export function ProjectDetailsPage(){
     }, [])
 
     return(
-       <div>
+       <div className="container d-flex flex-column align-items-center">
        {project && (
         <>
             <h1>{project.title}</h1>
@@ -40,9 +40,9 @@ export function ProjectDetailsPage(){
        {project && project.tasks.map((task) => (
         <TaskCard key={task._id} task={task} />
        ))}
-       <Link to="/projects"><button>Back to Projects</button></Link>
-       <Link to={`/projects/edit/${id}`}><button>Edit Project</button></Link>
-       <button onClick={deleteProject}>Delete Project</button>
+       <Link to="/projects"><button className="btn btn-primary">Back to Projects</button></Link>
+       <Link to={`/projects/edit/${id}`}><button className="btn btn-primary my-2">Edit Project</button></Link>
+       <button onClick={deleteProject} className="btn btn-primary">Delete Project</button>
        </div>
     );
 }

@@ -21,7 +21,7 @@ export function ProjectListPage(){
     }, []);
 
     return(
-     <div className="ProjectListPage">
+     <div className="ProjectListPage d-flex flex-column align-items-center">
      <AddProject getAllProjects={getAllProjects} />
         {projects.map((project) => {
             return(

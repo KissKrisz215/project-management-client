@@ -1,17 +1,24 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
 export function ProjectDetailsPage(){
     const {id} = useParams();
     const [project,setProject] = useState(null);
+    const navigate = useNavigate();
 
     const getProject = () => {
         axios(`${API_URL}/api/projects/${id}`)
         .then((response) => setProject(response.data))
         .catch((err) => console.log(err));
+    }
+
+    const deleteProject = () => {
+        axios.delete(`${API_URL}/api/projects/${id}`)
+        .then((response) => navigate("/projects"))
+        .catch((err) => console.log(err))
     }
 
     useEffect(() => {
@@ -34,6 +41,7 @@ export function ProjectDetailsPage(){
        ))}
        <Link to="/projects"><button>Back to Projects</button></Link>
        <Link to={`/projects/edit/${id}`}><button>Edit Project</button></Link>
+       <button onClick={deleteProject}>Delete Project</button>
        </div>
     );
 }

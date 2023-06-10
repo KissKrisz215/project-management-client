@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { AddTask } from "../components/AddTask";
+import { TaskCard } from "../components/TaskCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -37,10 +38,7 @@ export function ProjectDetailsPage(){
        {project && <AddTask project={project} getProject={getProject} />}
        <h1>Tasks:</h1>
        {project && project.tasks.map((task) => (
-        <li key={task._id}>
-            <h2>{task.title}</h2>
-            <p>{task.description}</p>
-        </li>
+        <TaskCard key={task._id} task={task} />
        ))}
        <Link to="/projects"><button>Back to Projects</button></Link>
        <Link to={`/projects/edit/${id}`}><button>Edit Project</button></Link>

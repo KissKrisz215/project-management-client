@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AddProject } from "../components/AddProject";
+import { ProjectCard } from "../components/ProjectCard";
 
 const API_URL = "http://localhost:5005";
 
@@ -24,9 +25,7 @@ export function ProjectListPage(){
      <AddProject getAllProjects={getAllProjects} />
         {projects.map((project) => {
             return(
-                    <Link key={project._id} className="text-decoration-none text-dark" to={`/projects/${project._id}`}>
-                    <h2>{project.title}</h2>
-                    </Link>
+                    <ProjectCard key={project._id} project={project} />
             );
         })}
      </div>

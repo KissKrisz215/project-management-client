@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import projectsService from "../services/projects.service";
 
 const API_URL = `http://localhost:5005`;
 
@@ -17,7 +18,7 @@ export function AddProject({getAllProjects}){
 
         const storedToken = localStorage.getItem("authToken")
 
-     axios.post(`${API_URL}/api/projects`, body, {headers: {Authorization: `Bearer ${storedToken}`}})
+        projectsService.createProject(body)
      .then(response => {
         setBody({title: "", description: ""})
         getAllProjects();

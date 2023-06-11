@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AddProject } from "../components/AddProject";
 import { ProjectCard } from "../components/ProjectCard";
+import projectsService from "../services/projects.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -15,9 +16,7 @@ export function ProjectListPage(){
 
         const storedToken = localStorage.getItem("authToken")
 
-        axios.get(`${API_URL}/api/projects`, 
-            {headers:{ Authorization: `Bearer ${storedToken}`}}
-        )
+        projectsService.getAllProjects()
         .then((response) => setProjects(response.data))
         .catch((error) => console.log(error));
     }

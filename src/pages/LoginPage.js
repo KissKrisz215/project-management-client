@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import authService from "../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -22,7 +23,7 @@ export function LoginPage(props){
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_URL}/auth/login`, body)
+        authService.login(body)
         .then((response) => {
             console.log(response.data.authToken)
             storeToken(response.data.authToken)

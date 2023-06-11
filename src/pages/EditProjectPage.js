@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import projectsService from "../services/projects.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -11,7 +12,7 @@ export function EditProjectPage(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios(`${API_URL}/api/projects/${id}`, {headers: {Authorization: `Bearer ${storedToken}`}})
+        projectsService.getProject(id)
         .then((response) => {
             setBody({
                 title: response.data.title,
@@ -23,7 +24,7 @@ export function EditProjectPage(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`${API_URL}/api/projects/${id}`, body, {headers: {Authorization: `Bearer ${storedToken}`}})
+        projectsService.updateProjects(id,body)
         .then((response) => {
             const data = response.data;
             setBody({

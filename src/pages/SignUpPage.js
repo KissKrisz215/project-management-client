@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom';
+import authService from "../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -17,7 +18,7 @@ export function SignUpPage(){
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_URL}/auth/signup`, body)
+        authService.signup(body)
         .then((response) => navigate("/login"))
         .catch((error) => {
             const errorDescription = error.response.data.message;

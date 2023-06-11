@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { AddTask } from "../components/AddTask";
 import { TaskCard } from "../components/TaskCard";
+import projectsService from "../services/projects.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -15,15 +16,14 @@ export function ProjectDetailsPage(){
 
         const storedToken = localStorage.getItem("authToken");
 
-        axios(`${API_URL}/api/projects/${id}`,
-         {headers: {Authorization: `Bearer ${storedToken}`}})
+        projectsService.getProject(id)
         .then((response) => setProject(response.data))
         .catch((err) => console.log(err));
     }
 
     const deleteProject = () => {
         const storedToken = localStorage.getItem("authToken")
-        axios.delete(`${API_URL}/api/projects/${id}`, {headers: {Authorization: `Bearer ${storedToken}`}})
+        projectsService.deleteProject(id)
         .then((response) => navigate("/projects"))
         .catch((err) => console.log(err))
     }
